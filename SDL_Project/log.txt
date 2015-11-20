@@ -21,3 +21,4 @@ ERROR:  (image not loadedc:\users\vincenzo\desktop\sdl_project\sdl_project\main.
 INFO: Entering Window constructor (c:\users\vincenzo\desktop\sdl_project\sdl_project\window.cpp:9)
 ERROR:  (image not loadedc:\users\vincenzo\desktop\sdl_project\sdl_project\main.cpp:33)
 INFO: Entering Window constructor (c:\users\vincenzo\desktop\sdl_project\sdl_project\window.cpp:9)
+INFO: Entering Window constructor (c:\users\vincenzo\desktop\sdl_project\sdl_project\window.cpp:9)
