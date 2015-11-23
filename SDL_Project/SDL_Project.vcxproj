@@ -129,12 +129,14 @@
     <ClCompile Include="..\..\..\..\Users\Vincenzo\Desktop\SDL_Project\SDL_Project\main.cpp" />
     <ClCompile Include="..\..\..\..\Users\Vincenzo\Desktop\SDL_Project\SDL_Project\Timer.cpp" />
     <ClCompile Include="..\..\..\..\Users\Vincenzo\Desktop\SDL_Project\SDL_Project\Window.cpp" />
+    <ClCompile Include="Animation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Users\Vincenzo\Desktop\SDL_Project\SDL_Project\Debug.h" />
     <ClInclude Include="..\..\..\..\Users\Vincenzo\Desktop\SDL_Project\SDL_Project\GameSceneManager.h" />
     <ClInclude Include="..\..\..\..\Users\Vincenzo\Desktop\SDL_Project\SDL_Project\Timer.h" />
     <ClInclude Include="..\..\..\..\Users\Vincenzo\Desktop\SDL_Project\SDL_Project\Window.h" />
+    <ClInclude Include="Animation.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Resources\Title.bmp" />

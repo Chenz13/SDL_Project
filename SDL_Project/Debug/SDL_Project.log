@@ -1,2 +1,4 @@
-﻿  main.cpp
-  SDL_Project.vcxproj -> C:\GameDev\C++\SDL_Project\Debug\SDL_Project.exe
+﻿  Animation.cpp
+  main.cpp
+c:\users\vincenzo\desktop\sdl_project\sdl_project\main.cpp(5): fatal error C1083: Cannot open include file: 'Animation.h': No such file or directory
+  Generating Code...
