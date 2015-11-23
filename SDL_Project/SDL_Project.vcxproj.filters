@@ -52,5 +52,8 @@
     <Image Include="..\Resources\Title.bmp">
       <Filter>Resource Files\images</Filter>
     </Image>
+    <Image Include="images\Sonic.bmp">
+      <Filter>Resource Files\images</Filter>
+    </Image>
   </ItemGroup>
 </Project>
