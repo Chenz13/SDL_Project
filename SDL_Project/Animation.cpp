@@ -15,7 +15,7 @@ Animation::Animation()
 Animation::~Animation()
 {
 }
-
+//editeddddddd
 //creates a texture from BMP, this may be more useful in a GameObject class 
 void Animation::LoadSpriteSheet(const char* fileNameBMP) {	
 
