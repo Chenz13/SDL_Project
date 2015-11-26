@@ -10,16 +10,17 @@ public:
 	~Animation();
 
 	SDL_Rect* animRect;
-	SDL_Rect* objRect;
+	const SDL_Rect* objRect;
 	int numOfFrames;
 	bool play;
 	int delay;
 
-	void PlayAnim(SDL_Rect* animRect[], int numOfFrames, bool play, int delay );
-	SDL_Renderer* Get_Renderer(SDL_Renderer&);
-	SDL_Rect* Set_ObjRect(SDL_Rect&);
+	void PlayAnim( int numOfFrames, bool play, int delay );
+	SDL_Renderer* Get_Renderer(SDL_Renderer*);
+	void Set_ObjRect(SDL_Rect*);
 	void LoadSpriteSheet(const char* fileNameBMP);
-	void Set_AnimRect(int x, int y, int w, int h, int numOfFrames, int numOfRows, int framesPerRow);
+	SDL_Rect* Set_AnimRect(int x, int y, int w, int h, int numOfFrames, int numOfRows, int framesPerRow);
+	void DestroyAnim();
 
 private:
 	int currentFrame;

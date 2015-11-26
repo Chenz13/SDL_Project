@@ -7,36 +7,34 @@ namespace GAME {
 	class Window {
 	public:
 		Window();
+		~Window();
+
+		/// C11 precautions delete these non-needed default constructors and operators
 		Window(const Window&) = delete;
 		Window(Window&&) = delete;
-		Window& operator=(const Window&) = delete;
-		Window& operator=(Window&&) = delete;
-		~Window();
+		Window& operator = (const Window&) = delete;
+		Window& operator = (Window&&) = delete;
+
 		bool Initialize();
 		void Shutdown();
 		void ClearRenderer() const;
 		void SetWindowSize(const int Width_, const int Height_);
 		void ToggleFullScreen();
 		SDL_Renderer* GetRenderer() const;
-		SDL_Surface* GetSurface() const;
 		SDL_Window* GetWindow() const;
-		void LoadSurface();
 		int GetWidth() const;
 		int GetHeight() const;
-	
 
 	protected:
 	private:
 		SDL_Window* SDLWindow;
 		SDL_Renderer* SDLRenderer;
 		SDL_Surface* SDLSurface;
+
 		SDL_Rect winRect;
 
-		int Width;
-		int Height;
-
-		bool bIsInitialized;
-		bool bIsFullScreen;
+		bool isInitialized;
+		bool isFullScreen;
 	};
 }
 

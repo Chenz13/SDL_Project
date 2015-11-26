@@ -1,12 +1,12 @@
-#include "Window.h"
-#include <string>
-#include "string.h"
+
 #include <sstream>
 #include "Debug.h"
+#include "Window.h"
 
 using namespace GAME;
-using namespace std;
-Window::Window() :SDLWindow(nullptr), SDLRenderer(nullptr), SDLSurface(nullptr), winRect(), Width(0), Height(0), bIsInitialized(false), bIsFullScreen(false) {
+
+Window::Window() :SDLWindow(nullptr), SDLRenderer(nullptr), SDLSurface(nullptr), winRect(), isInitialized(false), isFullScreen(false) {
+	Debug::Log(EMessageType::INFO, "Entering Window constructor", __FILE__, __LINE__);
 }
 
 Window::~Window() {
@@ -14,20 +14,18 @@ Window::~Window() {
 }
 
 bool Window::Initialize() {
-	bIsInitialized = false;
-
-
+	isInitialized = false;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		Debug::Log(EMessageType::FATAL_ERROR, std::string(SDL_GetError()), __FILE__, __LINE__);
-		return bIsInitialized = false;
+		return isInitialized;
 	}
 
 	if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
 		Debug::Log(EMessageType::WARNING, "Linear texture filtering is not enabled.", __FILE__, __LINE__);
 	}
 
-	SDLWindow = SDL_CreateWindow("SDL Example Project", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, winRect.w, winRect.h, SDL_WINDOW_SHOWN);
+	SDLWindow = SDL_CreateWindow("SDL Game Project", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, winRect.w, winRect.h, SDL_WINDOW_SHOWN);
 	if (!SDLWindow) {
 		Debug::Log(EMessageType::FATAL_ERROR, "Failed to create a window!", __FILE__, __LINE__);
 		Shutdown();
@@ -42,23 +40,13 @@ bool Window::Initialize() {
 		return false;
 	}
 
-	SDLSurface = SDL_GetWindowSurface(SDLWindow);
-
-	if (!SDLWindow) {
-		Debug::Log(EMessageType::FATAL_ERROR, std::string(SDL_GetError()), __FILE__, __LINE__);
-		Shutdown();
-		return false;
-	}
-
-	SDL_SetRenderDrawColor(SDLRenderer, 0, 0, 0, 255);
-	SDL_RenderPresent(SDLRenderer);
+	SDL_SetRenderDrawColor(SDLRenderer, 100, 100, 100, 255);
 	SDL_RenderFillRect(SDLRenderer, &winRect);
-
-
+	SDL_RenderPresent(SDLRenderer);
 	SDLSurface = SDL_GetWindowSurface(SDLWindow);
+	ClearRenderer();
 
-
-	bIsInitialized = true;
+	isInitialized = true;
 	return true;
 }
 
@@ -69,43 +57,36 @@ void Window::Shutdown() {
 	SDLRenderer = nullptr;
 	SDL_DestroyWindow(SDLWindow);
 	SDLWindow = nullptr;
-
-	bIsInitialized = false;
+	isInitialized = false;
 }
 
-void Window::SetWindowSize(const int Width_, const int Height_) {
-	winRect.w = Width_;
-	winRect.h = Height_;
+void Window::SetWindowSize(const int width_, const int height_) {
+	winRect.w = width_;
+	winRect.h = height_;
 }
 
 void Window::ClearRenderer() const {
-	SDL_SetRenderDrawColor(SDLRenderer, 0, 0, 0, 255);
+	SDL_SetRenderDrawColor(SDLRenderer, 255, 255, 255, 255);
 	SDL_RenderClear(SDLRenderer);
 }
 
 void Window::ToggleFullScreen() {
-	bIsFullScreen = !bIsFullScreen;
-	SDL_SetWindowFullscreen(SDLWindow, (bIsFullScreen ? SDL_WINDOW_FULLSCREEN : SDL_WINDOW_SHOWN));
+	isFullScreen = !isFullScreen;
+	SDL_SetWindowFullscreen(SDLWindow, (isFullScreen ? SDL_WINDOW_FULLSCREEN : SDL_WINDOW_SHOWN));
+}
+
+SDL_Renderer* Window::GetRenderer() const {
+	return SDLRenderer;
 }
 
 SDL_Window* Window::GetWindow() const {
 	return SDLWindow;
 }
 
-
-SDL_Renderer* Window::GetRenderer() const {
-	return SDLRenderer;
-}
-
-SDL_Surface* Window::GetSurface() const {
-
-	return SDLSurface;
-}
-
 int Window::GetWidth() const {
-	return Width;
+	return winRect.w;
 }
 
 int Window::GetHeight() const {
-	return Height;
+	return winRect.h;
 }
