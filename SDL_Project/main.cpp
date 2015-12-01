@@ -14,7 +14,7 @@ const int SCREEN_HEIGHT = 480;
 using namespace std;
 using namespace GAME;
 
-Animation* anim = new Animation();
+Animation* anim = NULL;
 Window* window = new Window();
 SDL_Surface* loadingSurf = NULL;
 SDL_Surface* sonicSurf = NULL;
@@ -42,12 +42,18 @@ void PlayAnim(SDL_Renderer* renderer, SDL_Texture* imageTexture, SDL_Rect* frame
 int main(int argc, char* args[]) {
 
 	SDL_Init(SDL_INIT_EVERYTHING);
+
+	playerRect = new SDL_Rect();
+	playerRect->x = 150;
+	playerRect->y = 150;
+	playerRect->w = 48;
+	playerRect->h = 50;
 	
 	window->SetWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	window->Initialize();
-	//anim->LoadSpriteSheet("images/Sonic.bmp");
-	//anim->Get_Renderer(*window->GetRenderer());
-	//anim->Set_AnimRect(0, 0, 48, 50, 55, 5, 11);
+	anim = new Animation(0, 0, 48, 50, 55, 5, 11, playerRect);
+	anim->LoadSpriteSheet("images/Sonic.bmp", window->GetRenderer());
+
 	
 	SDL_Event e;
 	bool exit = false;
@@ -87,13 +93,6 @@ int main(int argc, char* args[]) {
 		idleFrame[i]->h = 50;
 	}
 
-	playerRect = new SDL_Rect();
-	playerRect->x = 150;
-	playerRect->y = 150;
-	playerRect->w = 50;
-	playerRect->h = 50;
-	
-
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
 	while (!exit) {
@@ -106,9 +105,9 @@ int main(int argc, char* args[]) {
 		SDL_RenderClear(window->GetRenderer());
 		SDL_RenderCopy(window->GetRenderer(), titleImage, NULL, NULL);
 		
-		//anim->PlayAnim(55, true, 50);
-		PlayAnim(window->GetRenderer(), sonicTexture, idleFrame, playerRect, 6, true, 50);
-		SDL_RenderPresent(window->GetRenderer()); 
+		anim->PlayAnim(55, true, 100, *window->GetRenderer());
+	//	PlayAnim(window->GetRenderer(), sonicTexture, idleFrame, playerRect, 6, true, 50);
+		//SDL_RenderPresent(window->GetRenderer()); 
 	}
 
 	SDL_Delay(250);
