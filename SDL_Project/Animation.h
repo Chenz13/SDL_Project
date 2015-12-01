@@ -21,13 +21,13 @@ public:
 	int frameCount;
 	int rowCount;
 	int colCount;
-	void PlayAnim( int numOfFrames, bool play, int delay, SDL_Renderer& renderer );
+	void PlayAnim(bool play, int delay, SDL_Renderer& renderer);
 	//SDL_Renderer* Get_Renderer(SDL_Renderer*);
 	void Set_ObjRect(SDL_Rect*);
 	SDL_Texture* LoadSpriteSheet(const char* fileNameBMP, SDL_Renderer* renderer);
 	void Set_AnimRect();
 	void DestroyAnim();
-
+	void Set_Animation(int startFram, int endFrame);
 private:
 	int currentFrame;
 	//SDL_Renderer* renderer;

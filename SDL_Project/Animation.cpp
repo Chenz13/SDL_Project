@@ -6,10 +6,13 @@ SDL_Surface* spriteSheetSurf = NULL;
 SDL_Texture* spriteSheetTex = NULL;
 SDL_Rect* objRect = NULL;
 SDL_Rect* animRect = NULL;
+SDL_Rect* animationRect = NULL;
 
 int frameCount = 0;
 int rowCount = 0;
 int colCount = 0;
+int _endFrame = 0;
+int _startFrame = 0;
 
 Animation::Animation(int _x, int _y, int _w, int _h, int _numOfFrames, int _numOfRows, int _framesPerRow, SDL_Rect* _objRect)
 {
@@ -29,7 +32,6 @@ Animation::~Animation()
 //editeddddddd
 //creates a texture from BMP, this may be more useful in a GameObject class 
 SDL_Texture* Animation::LoadSpriteSheet(const char* fileNameBMP, SDL_Renderer* renderer) {	
-
 	spriteSheetSurf = SDL_LoadBMP(fileNameBMP);
 	SDL_SetColorKey(spriteSheetSurf, SDL_TRUE, SDL_MapRGB(spriteSheetSurf->format, 255, 0, 255));
 	spriteSheetTex = SDL_CreateTextureFromSurface(renderer, spriteSheetSurf);
@@ -75,24 +77,38 @@ void Animation::Set_AnimRect() {
 }
 
 //void Animation::SetAnimationState(SDL_Renderer& winRenderer, SDL_Rect& playerRect, )
+void Animation::Set_Animation(int startFrame, int endFrame) {
+	//animation variables
+	currentFrame = startFrame;
+	_endFrame = endFrame;
+	_startFrame = startFrame;
+	//int j = 0;
 
-void Animation::PlayAnim(int numOfFrames, bool play, int delay, SDL_Renderer& renderer) {
+	//for (int i = startFrame; i <= endFrame; i++) {
+	//	//newAnimRect ptr points to the address of the animRects between the start and end frames of the animation
+	//	if (j <= endFrame - startFrame) {
+	//		newAnimRect[j] = &animRect[i];
+	//		std::cout << " animRect number = " << i << " x = " << animRect[i].x << " y = " << animRect[i].y<< std::endl;
 
+	//	}
+	//	j++;
+	//}
+	
+}
+
+void Animation::PlayAnim(bool play, int delay, SDL_Renderer& renderer) {
 	if (play == true) {
-
-		if (currentFrame < numOfFrames) {
+		if (currentFrame <= _endFrame) {
 			SDL_RenderCopy(&renderer, spriteSheetTex, &animRect[currentFrame], objRect);
 			SDL_RenderPresent(&renderer);
 			SDL_Delay(delay);
-			
 		}
 		else { 
-			currentFrame = 0;
+			currentFrame = _startFrame;
 		}
 		std::cout << "currentFrame " << currentFrame << std::endl;
 		currentFrame++;
 	}
-	
 }
 
 void Animation::DestroyAnim() {

@@ -27,17 +27,17 @@ int currentFrame = 0;
 
 
 
-void PlayAnim(SDL_Renderer* renderer, SDL_Texture* imageTexture, SDL_Rect* frameRect[], SDL_Rect* dsRect, int numOfFrames, bool play, float delay) {
-	if (play == true) {
-		if (currentFrame < numOfFrames) {
-			SDL_RenderCopy(window->GetRenderer(), imageTexture, frameRect[currentFrame], dsRect);
-			SDL_RenderPresent(window->GetRenderer());
-			SDL_Delay(delay);
-		}
-		else { currentFrame = 0; }
-		currentFrame++;
-	}
-}
+//void PlayAnim(SDL_Renderer* renderer, SDL_Texture* imageTexture, SDL_Rect* frameRect[], SDL_Rect* dsRect, int numOfFrames, bool play, float delay) {
+//	if (play == true) {
+//		if (currentFrame < numOfFrames) {
+//			SDL_RenderCopy(window->GetRenderer(), imageTexture, frameRect[currentFrame], dsRect);
+//			SDL_RenderPresent(window->GetRenderer());
+//			SDL_Delay(delay);
+//		}
+//		else { currentFrame = 0; }
+//		currentFrame++;
+//	}
+//}
 
 int main(int argc, char* args[]) {
 
@@ -53,7 +53,10 @@ int main(int argc, char* args[]) {
 	window->Initialize();
 	anim = new Animation(0, 0, 48, 50, 55, 5, 11, playerRect);
 	anim->LoadSpriteSheet("images/Sonic.bmp", window->GetRenderer());
+	anim->Set_Animation(15, 21);
 
+	//SDL_Rect* walkingAnimRect[5];
+	//anim->Set_Animation(0, 6, walkingAnimRect);
 	
 	SDL_Event e;
 	bool exit = false;
@@ -77,21 +80,22 @@ int main(int argc, char* args[]) {
 	SDL_Rect* idleFrame[6];
 	SDL_Rect* frame[6];
 
-	for (int i = 0; i <=5; i++) {
-		frame[i] = new SDL_Rect();
+	//for (int i = 0; i <=5; i++) {
+	//	frame[i] = new SDL_Rect();
 
-		frame[i]->x = i * 48;
-		frame[i]->y = 0;
-		frame[i]->w = 48;
-		frame[i]->h = 50;
-	}
-	for (int i = 0; i <= 5; i++) {
-		idleFrame[i] = new SDL_Rect();
-		idleFrame[i]->x = (5 + i) * 48;
-		idleFrame[i]->y = 0;
-		idleFrame[i]->w = 48;
-		idleFrame[i]->h = 50;
-	}
+	//	frame[i]->x = i * 48;
+	//	frame[i]->y = 0;
+	//	frame[i]->w = 48;
+	//	frame[i]->h = 50;
+	//}
+
+	//for (int i = 0; i <= 5; i++) {
+	//	idleFrame[i] = new SDL_Rect();
+	//	idleFrame[i]->x = (5 + i) * 48;
+	//	idleFrame[i]->y = 0;
+	//	idleFrame[i]->w = 48;
+	//	idleFrame[i]->h = 50;
+	//}
 
 	const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
@@ -105,7 +109,7 @@ int main(int argc, char* args[]) {
 		SDL_RenderClear(window->GetRenderer());
 		SDL_RenderCopy(window->GetRenderer(), titleImage, NULL, NULL);
 		
-		anim->PlayAnim(55, true, 100, *window->GetRenderer());
+		anim->PlayAnim(true, 100, *window->GetRenderer());
 	//	PlayAnim(window->GetRenderer(), sonicTexture, idleFrame, playerRect, 6, true, 50);
 		//SDL_RenderPresent(window->GetRenderer()); 
 	}
