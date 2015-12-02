@@ -39,16 +39,6 @@ SDL_Texture* Animation::LoadSpriteSheet(const char* fileNameBMP, SDL_Renderer* r
 	return spriteSheetTex;
 }
 
-//Window Renderer
-//SDL_Renderer* Animation::Get_Renderer(SDL_Renderer* winRenderer) {
-//	return renderer = winRenderer;
-//}
-
-//player/dstRect
-//void Animation::Set_ObjRect(SDL_Rect* playerRect) {
-//	 objRect = playerRect;
-//	
-//}
 
 void Animation::Set_AnimRect() {
 
@@ -76,25 +66,15 @@ void Animation::Set_AnimRect() {
 
 }
 
+
 //void Animation::SetAnimationState(SDL_Renderer& winRenderer, SDL_Rect& playerRect, )
 void Animation::Set_Animation(int startFrame, int endFrame) {
-	//animation variables
+
 	currentFrame = startFrame;
 	_endFrame = endFrame;
 	_startFrame = startFrame;
-	//int j = 0;
-
-	//for (int i = startFrame; i <= endFrame; i++) {
-	//	//newAnimRect ptr points to the address of the animRects between the start and end frames of the animation
-	//	if (j <= endFrame - startFrame) {
-	//		newAnimRect[j] = &animRect[i];
-	//		std::cout << " animRect number = " << i << " x = " << animRect[i].x << " y = " << animRect[i].y<< std::endl;
-
-	//	}
-	//	j++;
-	//}
-	
 }
+
 
 void Animation::PlayAnim(bool play, int delay, SDL_Renderer& renderer) {
 	if (play == true) {

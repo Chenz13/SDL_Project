@@ -28,6 +28,7 @@ public:
 	void Set_AnimRect();
 	void DestroyAnim();
 	void Set_Animation(int startFram, int endFrame);
+
 private:
 	int currentFrame;
 	//SDL_Renderer* renderer;
